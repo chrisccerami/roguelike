@@ -1,17 +1,29 @@
 class Map
   require 'yaml'
-  MAP_FILE = YAML.load_file('./map.yaml')
 
+  attr_reader :file
   attr_accessor :layout, :number, :initial_x, :initial_y
-  def initialize(number)
-    map = Map.find_map(number)
+  def initialize(file_name, number)
+    @file = YAML.load_file(file_name)
+    map = Map.find_map(@file, number)
     @number = number
     @layout = map["layout"]
     @initial_x = map["initial_x"]
     @initial_y = map["initial_y"]
   end
 
-  def self.find_map(n)
-    MAP_FILE.select { |map| map["number"] == n }.first
+  def update_map(number)
+    map = Map.find_map(self.file, number)
+    @number = number
+    @layout = map["layout"]
+    @initial_x = map["initial_x"]
+    @initial_y = map["initial_y"]
   end
+
+  private
+
+  def self.find_map(file, n)
+    file.select { |map| map["number"] == n }.first
+  end
+
 end

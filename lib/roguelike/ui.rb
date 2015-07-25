@@ -55,9 +55,8 @@ class UI
 
   def next_room
     clear
-    current_room = Game.instance.map.number
-    new_map = Map.new(current_room + 1)
-    Game.instance.map = new_map
-    load_room(new_map)
+    next_room = Game.instance.map.number + 1
+    Game.instance.map.update_map(next_room)
+    load_room(Game.instance.map)
   end
 end

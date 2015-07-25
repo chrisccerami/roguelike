@@ -8,7 +8,7 @@ module Roguelike
   require 'character'
   require 'yaml'
 
-  def self.run
-    Game.instance.run
+  def self.run(map_name)
+    Game.instance.run(map_name)
   end
 end

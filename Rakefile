@@ -10,5 +10,5 @@ task :console do
 end
 
 task :run do
-  Roguelike.run
+  Roguelike.run("./map.yaml")
 end

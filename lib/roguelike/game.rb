@@ -2,15 +2,16 @@ class Game
   include Singleton
 
   attr_reader :ui, :character
-  attr_accessor :map
+  attr_accessor :map, :map_name
   def initialize
+    @map
     @ui = UI.instance
-    @map = Map.new(1)
-    @character = Character.new("@", @map.initial_x, @map.initial_y)
-    at_exit { ui.close }
+    @character = Character.new("@", nil, nil)
   end
 
-  def run
+  def run(map_name)
+    self.map = Map.new(map_name, 1)
+    set_character_position
     ui.write(0, 0, map.layout)
     ui.write(character.x_pos, character.y_pos, character.avatar)
     loop do
@@ -20,6 +21,10 @@ class Game
 
   private
 
+  def set_character_position
+    character.x_pos = @map.initial_x
+    character.y_pos = @map.initial_y
+  end
 
   def accept_input
     inputs = {
