@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require 'commander/import'
+require './lib/roguelike'
+
+program :version, '0.0.1'
+program :description, 'A generator for Rogue clones using levels designed in YAML'
+command :run do |c|
+  c.syntax = 'roguelike run [options]'
+  c.summary = 'Create Rogue clones using levels designed in YAML'
+  c.description = "Roguelike will read your game's YAML file, create levels based on your designs, and then handle all of the logic of building and running a customized Rogue clone for you."
+  c.example 'Run your new Rogue clone', 'roguelike run my_levels.yaml'
+  c.action do |args, options|
+    Roguelike.run(args.first)
+  end
+end
+

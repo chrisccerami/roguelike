@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    commander (4.3.4)
+      highline (~> 1.7.2)
+    highline (1.7.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  commander
+
+BUNDLED WITH
+   1.10.3
