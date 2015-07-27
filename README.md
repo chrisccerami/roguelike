@@ -1,3 +1,5 @@
+[![Gem Version](https://badge.fury.io/rb/roguelike.svg)](http://badge.fury.io/rb/roguelike)
+
 # Roguelike
 
 A Rogue cloning engine written in Ruby
