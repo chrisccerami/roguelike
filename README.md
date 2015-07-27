@@ -28,6 +28,8 @@ Character | What it Represents
 
 There will be more characters available to represent other elements, such as enemies, traps, or treasure further in development. The player's character will be rendered as the `@` character based on the coordinates designed in the YAML file.
 
+For an example of how your YAML file should be constructed, look at [example_map.yaml](https://github.com/chrisccerami/roguelike/blob/master/map_example.yaml)
+
 Once your map is complete, you can start the program using the command:
 
 ```shell
