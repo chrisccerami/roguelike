@@ -2,8 +2,9 @@
 
 require 'commander/import'
 require './lib/roguelike'
+require './lib/roguelike/version'
 
-program :version, '0.0.1'
+program :version, Roguelike::VERSION
 program :description, 'A generator for Rogue clones using levels designed in YAML'
 command :run do |c|
   c.syntax = 'roguelike run [options]'
