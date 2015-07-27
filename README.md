@@ -23,10 +23,10 @@ layout | A visual representation in ASCII characters of the room's layout
 
 When drawing the layout, the following characters should be used to represent various parts of the map:
 
-Character | What it Represents
-----------|-------------------
+Character   | What it Represents
+------------|-------------------
 `|` and `-` | Walls, which the player cannot pass through
-`#`       | Doors/stairs, which will lead the player to the next room
+`#`         | Doors/stairs, which will lead the player to the next room
 
 There will be more characters available to represent other elements, such as enemies, traps, or treasure further in development. The player's character will be rendered as the `@` character based on the coordinates designed in the YAML file.
 
