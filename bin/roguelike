@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'commander/import'
-require './lib/roguelike'
-require './lib/roguelike/version'
+require 'roguelike'
+require 'roguelike/version'
 
 program :version, Roguelike::VERSION
 program :description, 'A generator for Rogue clones using levels designed in YAML'
