@@ -19,6 +19,23 @@ class UI
     addstr(string)
   end
 
+  def write_map(layout)
+    x = 0
+    y = 0
+    rows = layout.split("\n")
+    rows.each do |row|
+      row.each_char do |char|
+        object = initialize_by_string(x, y, char)
+        add_to_game(object) if object
+        setpos(y, x)
+        addstr(char)
+        x += 1
+      end
+      x = 0
+      y += 1
+    end
+  end
+
   def accept_input
     inputs = %w(w a s d q)
     loop do
@@ -33,30 +50,45 @@ class UI
     insch(' ')
   end
 
-  def wall?(x, y)
-    setpos(y, x)
-    inch.chr == '|' || inch.chr == '-'
-  end
-
-  def door?(x, y)
-    setpos(y, x)
-    inch.chr =='#'
-  end
-
   def alert_user
     beep
     flash
   end
 
   def load_room(map)
-    write(0, 0, map.layout)
-    Game.instance.character.move(map.initial_x, map.initial_y)
+    write_map(map.layout)
   end
 
   def next_room
     clear
     next_room = Game.instance.map.number + 1
     Game.instance.map.update_map(next_room)
+    Game.instance.interactables = []
     load_room(Game.instance.map)
+  end
+
+  def game_over
+    clear
+    setpos(0, 0)
+    addstr("You have been defeated. Try again.")
+  end
+
+  private
+
+  def add_to_game(interactable)
+    Game.instance.interactables << interactable
+  end
+
+  def initialize_by_string(x, y, string)
+    if string == "|" || string == "-"
+      Wall.new(x: x, y: y, avatar: string)
+    elsif string == "@"
+      Game.instance.character.set_position(x, y)
+      Game.instance.character
+    elsif string == "#"
+      Door.new(x: x, y: y, avatar: string)
+    elsif /[a-zA-Z]/ =~ string
+      Enemy.new(x: x, y: y, avatar: string)
+    end
   end
 end

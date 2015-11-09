@@ -2,39 +2,58 @@ class Game
   include Singleton
 
   attr_reader :ui, :character
-  attr_accessor :map, :map_name
+  attr_accessor :map, :map_name, :interactables
   def initialize
-    @map
     @ui = UI.instance
-    @character = Character.new("@", nil, nil)
+    @character = Character.new(avatar: "@", x: nil, y: nil)
+    @interactables = []
   end
 
   def run(map_name)
-    self.map = Map.new(map_name, 1)
-    set_character_position
-    ui.write(0, 0, map.layout)
-    ui.write(character.x_pos, character.y_pos, character.avatar)
+    setup(map_name)
     loop do
       accept_input
     end
   end
 
-  private
-
-  def set_character_position
-    character.x_pos = @map.initial_x
-    character.y_pos = @map.initial_y
+  def self.thing_in_position(x, y)
+    instance.interactables.find do |obj|
+      obj.x_pos == x && obj.y_pos == y
+    end
   end
 
+  def ais
+    interactables.select(&:ai?)
+  end
+
+  def self.chance
+    rand > 0.5
+  end
+
+  def self.over
+    UI.instance.game_over
+  end
+
+  private
+
   def accept_input
-    inputs = {
-      w: proc { character.move_up },
-      a: proc { character.move_left },
-      s: proc { character.move_down },
-      d: proc { character.move_right },
-      q: proc { ui.close }
-    }
-    inputs[ui.accept_input.to_sym].call
-    ui.write(character.x_pos, character.y_pos, character.avatar)
+    case ui.accept_input.to_sym
+    when :w
+      character.move_up
+    when :a
+      character.move_left
+    when :s
+      character.move_down
+    when :d
+      character.move_right
+    when :q
+      ui.close
+    end
+    ais.each(&:take_turn)
+  end
+
+  def setup(map_name)
+    self.map = Map.new(map_name, 1)
+    ui.write_map(map.layout)
   end
 end
