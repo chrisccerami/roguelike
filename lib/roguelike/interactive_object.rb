@@ -7,7 +7,7 @@ class InteractiveObject
   end
 
   def passable?
-    raise "Not Implemented"
+    fail "Not Implemented"
   end
 
   def move_up
@@ -33,8 +33,9 @@ class InteractiveObject
       @y_pos = y
       thing = Game.thing_in_position(x, y)
       thing.interact if thing
+      UI.instance.write(x_pos, y_pos, avatar)
     else
-      thing.interact
+      Game.thing_in_position(x, y).interact
       UI.instance.alert_user
     end
   end

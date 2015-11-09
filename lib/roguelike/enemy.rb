@@ -20,6 +20,6 @@ class Enemy < InteractiveObject
   private
 
   def find_data(avatar)
-    DATA.select {|enemy| enemy["avatar"] == avatar }.first
+    DATA.find { |enemy| enemy["avatar"] == avatar }
   end
 end

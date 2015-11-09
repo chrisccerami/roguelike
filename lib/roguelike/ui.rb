@@ -75,14 +75,12 @@ class UI
   end
 
   def initialize_by_string(x, y, string)
-    if string ==  "|" || string == "-"
+    if string == "|" || string == "-"
       Wall.new(x: x, y: y, avatar: string)
     elsif string == "#"
       Door.new(x: x, y: y, avatar: string)
     elsif /[a-zA-Z]/ =~ string
       Enemy.new(x: x, y: y, avatar: string)
-    else
-      nil
     end
   end
 end

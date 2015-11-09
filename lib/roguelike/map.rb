@@ -11,7 +11,7 @@ class Map
   end
 
   def update_map(number)
-    map = Map.find_map(self.file, number)
+    map = Map.find_map(file, number)
     @number = number
     @layout = map["layout"]
     @initial_x = map["initial_x"]
@@ -21,7 +21,7 @@ class Map
   private
 
   def self.find_map(file, n)
-    file.select { |map| map["number"] == n }.first
+    file.find { |map| map["number"] == n }
   end
 
 end
