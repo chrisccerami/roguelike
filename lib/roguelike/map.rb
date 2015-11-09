@@ -1,6 +1,4 @@
 class Map
-  require 'yaml'
-
   attr_reader :file
   attr_accessor :layout, :number, :initial_x, :initial_y
   def initialize(file_name, number)

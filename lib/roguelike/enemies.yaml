@@ -1,0 +1,7 @@
+---
+- avatar: b
+  name: Bat
+  hp: 1
+- avatar: z
+  name: Zombie
+  hp: 3
