@@ -1,6 +1,6 @@
 class Door < InteractiveObject
   def passable?
-    true
+    false
   end
 
   def interact

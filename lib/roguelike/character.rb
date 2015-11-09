@@ -9,4 +9,9 @@ class Character < InteractiveObject
   def passable?
     false
   end
+
+  def set_position(x, y)
+    @x_pos = x
+    @y_pos = y
+  end
 end

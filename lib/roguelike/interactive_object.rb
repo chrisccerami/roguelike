@@ -29,10 +29,10 @@ class InteractiveObject
   def move(x, y)
     if can_move?(x, y)
       UI.instance.clear_position(@x_pos, @y_pos)
-      @x_pos = x
-      @y_pos = y
       thing = Game.thing_in_position(x, y)
       thing.interact if thing
+      @x_pos = x
+      @y_pos = y
       UI.instance.write(x_pos, y_pos, avatar)
     else
       Game.thing_in_position(x, y).interact

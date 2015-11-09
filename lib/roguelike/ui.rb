@@ -57,7 +57,6 @@ class UI
 
   def load_room(map)
     write_map(map.layout)
-    Game.instance.character.move(map.initial_x, map.initial_y)
   end
 
   def next_room
@@ -77,6 +76,9 @@ class UI
   def initialize_by_string(x, y, string)
     if string == "|" || string == "-"
       Wall.new(x: x, y: y, avatar: string)
+    elsif string == "@"
+      Game.instance.character.set_position(x, y)
+      Game.instance.character
     elsif string == "#"
       Door.new(x: x, y: y, avatar: string)
     elsif /[a-zA-Z]/ =~ string
