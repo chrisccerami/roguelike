@@ -67,6 +67,12 @@ class UI
     load_room(Game.instance.map)
   end
 
+  def game_over
+    clear
+    setpos(0, 0)
+    addstr("You have been defeated. Try again.")
+  end
+
   private
 
   def add_to_game(interactable)

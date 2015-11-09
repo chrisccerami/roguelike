@@ -22,6 +22,18 @@ class Game
     end
   end
 
+  def ais
+    interactables.select(&:ai?)
+  end
+
+  def self.chance
+    rand > 0.5
+  end
+
+  def self.over
+    UI.instance.game_over
+  end
+
   private
 
   def accept_input
@@ -37,6 +49,7 @@ class Game
     when :q
       ui.close
     end
+    ais.each(&:take_turn)
   end
 
   def setup(map_name)

@@ -7,6 +7,10 @@ class Door < InteractiveObject
     UI.instance.next_room
   end
 
+  def ai?
+    false
+  end
+
   private
 
   def can_move?

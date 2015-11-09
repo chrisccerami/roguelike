@@ -10,6 +10,10 @@ class Character < InteractiveObject
     false
   end
 
+  def ai?
+    false
+  end
+
   def set_position(x, y)
     @x_pos = x
     @y_pos = y

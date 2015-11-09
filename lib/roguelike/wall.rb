@@ -6,6 +6,10 @@ class Wall < InteractiveObject
   def interact
   end
 
+  def ai?
+    false
+  end
+
   private
 
   def can_move?
